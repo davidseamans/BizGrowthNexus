@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';  // Make sure to include axios
+import axios from 'axios'; // Make sure to import axios here
 
 function App() {
   const [dashboardData, setDashboardData] = useState(null);
@@ -13,7 +13,7 @@ function App() {
       .catch(error => {
         setError(error);
       });
-  }, []); // The empty array ensures the effect runs only once
+  }, []); // Empty dependency array to run effect only once on mount
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -24,8 +24,9 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <h1>Dashboard</h1>
+    <div>
+      {/* Render dashboard data here */}
+      <h1>Dashboard Data</h1>
       <pre>{JSON.stringify(dashboardData, null, 2)}</pre>
     </div>
   );
