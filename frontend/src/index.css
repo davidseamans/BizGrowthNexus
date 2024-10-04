@@ -1,0 +1,16 @@
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+.metric {
+  background: #f4f4f4;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.metric h2 {
+  margin-top: 0;
+}
