@@ -1,4 +1,4 @@
-2024-10-25 22:41:53,457 ERROR: Exception on / [GET] [in /Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py:838]
+2024-10-25 22:57:36,157 ERROR: Exception on /marketing_plan [GET] [in /Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py:838]
 Traceback (most recent call last):
   File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
     response = self.full_dispatch_request()
@@ -12,74 +12,15 @@ Traceback (most recent call last):
   File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Projects/BizGrowthNexus/app.py", line 102, in home
-    return render_template('index.html', tactics=tactics)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/templating.py", line 150, in render_template
-    return _render(app, template, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/templating.py", line 131, in _render
-    rv = template.render(context)
-         ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/jinja2/environment.py", line 1304, in render
-    self.environment.handle_exception()
-  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/jinja2/environment.py", line 939, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/Users/davidseamans/Projects/BizGrowthNexus/templates/index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/davidseamans/Projects/BizGrowthNexus/templates/base.html", line 49, in top-level template code
-    <a class="nav-link" href="{{ url_for('community') }}">Community</a>
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 1084, in url_for
-    return self.handle_url_build_error(error, endpoint, values)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 1073, in url_for
-    rv = url_adapter.build(  # type: ignore[union-attr]
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 924, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'community'. Did you mean 'resource_center' instead?
-2024-10-25 22:41:53,463 ERROR: 500 error occurred: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /Users/davidseamans/Projects/BizGrowthNexus/app.py:169]
-2024-10-25 22:44:17,432 INFO: Handles Project startup [in /Users/davidseamans/Projects/BizGrowthNexus/app.py:49]
-2024-10-25 22:44:22,606 ERROR: Exception on / [GET] [in /Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py:838]
-Traceback (most recent call last):
-  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Projects/BizGrowthNexus/app.py", line 102, in home
-    return render_template('index.html', tactics=tactics)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/templating.py", line 150, in render_template
-    return _render(app, template, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/templating.py", line 131, in _render
-    rv = template.render(context)
-         ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/jinja2/environment.py", line 1304, in render
-    self.environment.handle_exception()
-  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/jinja2/environment.py", line 939, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/Users/davidseamans/Projects/BizGrowthNexus/templates/index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/davidseamans/Projects/BizGrowthNexus/templates/base.html", line 49, in top-level template code
-    <a class="nav-link" href="{{ url_for('community') }}">Community</a>
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 1084, in url_for
-    return self.handle_url_build_error(error, endpoint, values)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 1073, in url_for
-    rv = url_adapter.build(  # type: ignore[union-attr]
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 924, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'community'. Did you mean 'resource_center' instead?
-2024-10-25 22:44:22,608 ERROR: 500 error occurred: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /Users/davidseamans/Projects/BizGrowthNexus/app.py:169]
+  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask_login/utils.py", line 285, in decorated_view
+    return current_app.login_manager.unauthorized()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask_login/login_manager.py", line 187, in unauthorized
+    flash(self.login_message, category=self.login_message_category)
+  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/helpers.py", line 323, in flash
+    session["_flashes"] = flashes
+    ~~~~~~~^^^^^^^^^^^^
+  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/sessions.py", line 102, in _fail
+    raise RuntimeError(
+RuntimeError: The session is unavailable because no secret key was set.  Set the secret_key on the application to something unique and secret.
+2024-10-25 22:57:36,161 ERROR: 500 error occurred: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /Users/davidseamans/Projects/BizGrowthNexus/app.py:188]
