@@ -1,0 +1,43 @@
+/* Style the navigation links */
+.navbar-nav .nav-link {
+    color: #007bff; /* Blue color for text */
+    font-weight: bold;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+    text-align: center; /* Center text */
+}
+
+/* Hover effect */
+.navbar-nav .nav-link:hover {
+    color: #ff6347; /* Change to tomato red color on hover */
+    border-bottom: 2px solid #ff6347; /* Underline effect */
+    cursor: pointer;
+}
+
+/* Active link */
+.navbar-nav .nav-link.active {
+    color: #28a745; /* Green color for active link */
+    border-bottom: 2px solid #28a745; /* Underline effect */
+}
+
+/* Align the text under each menu item */
+.navbar-nav .nav-item {
+    text-align: center; /* Center align the text */
+}
+
+/* Navbar media queries to ensure behavior on smaller screens */
+@media (max-width: 992px) {
+    .navbar-nav .nav-link {
+        display: block;
+        padding: 10px;
+    }
+
+    .navbar-toggler {
+        color: #007bff;
+        font-size: 1.5rem;
+        border: none;
+    }
+
+    .navbar-toggler:hover {
+        color: #0056b3;
+    }
+}
