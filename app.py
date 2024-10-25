@@ -153,6 +153,10 @@ def blog():  # Note: No @login_required since blogs are usually public
 def user_profile():
     return render_template('user_profile.html')
 
+@app.route('/help_support')
+def help_support():  # No login_required as help should be accessible to everyone
+    return render_template('help_support.html')
+
 # More routes and error handling here...
 
 # Error Handlers
