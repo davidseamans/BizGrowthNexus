@@ -148,6 +148,11 @@ def resource_center():
 def blog():  # Note: No @login_required since blogs are usually public
     return render_template('blog.html')
 
+@app.route('/user_profile')
+@login_required
+def user_profile():
+    return render_template('user_profile.html')
+
 # More routes and error handling here...
 
 # Error Handlers

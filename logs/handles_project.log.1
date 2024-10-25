@@ -1,4 +1,4 @@
-2024-10-25 21:54:19,955 ERROR: Exception on / [GET] [in /Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py:838]
+2024-10-25 22:06:38,235 ERROR: Exception on / [GET] [in /Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py:838]
 Traceback (most recent call last):
   File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
     response = self.full_dispatch_request()
@@ -27,8 +27,8 @@ Traceback (most recent call last):
     raise rewrite_traceback_stack(source=source)
   File "/Users/davidseamans/Projects/BizGrowthNexus/templates/index.html", line 1, in top-level template code
     {% extends "base.html" %}
-  File "/Users/davidseamans/Projects/BizGrowthNexus/templates/base.html", line 31, in top-level template code
-    <a class="nav-link" href="{{ url_for('marketing_plan') }}">Marketing<br>Plan</a>
+  File "/Users/davidseamans/Projects/BizGrowthNexus/templates/base.html", line 37, in top-level template code
+    <a class="nav-link" href="{{ url_for('resource_center') }}">Resource<br>Center</a>
     ^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 1084, in url_for
     return self.handle_url_build_error(error, endpoint, values)
@@ -38,10 +38,10 @@ Traceback (most recent call last):
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 924, in build
     raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'marketing_plan'. Did you mean 'static' instead?
-2024-10-25 21:54:19,959 ERROR: 500 error occurred: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /Users/davidseamans/Projects/BizGrowthNexus/app.py:141]
-2024-10-25 22:02:53,959 INFO: Handles Project startup [in /Users/davidseamans/Projects/BizGrowthNexus/app.py:49]
-2024-10-25 22:03:02,651 ERROR: Exception on / [GET] [in /Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py:838]
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'resource_center'. Did you mean 'sales_analysis' instead?
+2024-10-25 22:06:38,239 ERROR: 500 error occurred: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /Users/davidseamans/Projects/BizGrowthNexus/app.py:151]
+2024-10-25 22:13:59,471 INFO: Handles Project startup [in /Users/davidseamans/Projects/BizGrowthNexus/app.py:49]
+2024-10-25 22:14:05,749 ERROR: Exception on / [GET] [in /Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py:838]
 Traceback (most recent call last):
   File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
     response = self.full_dispatch_request()
@@ -70,8 +70,8 @@ Traceback (most recent call last):
     raise rewrite_traceback_stack(source=source)
   File "/Users/davidseamans/Projects/BizGrowthNexus/templates/index.html", line 1, in top-level template code
     {% extends "base.html" %}
-  File "/Users/davidseamans/Projects/BizGrowthNexus/templates/base.html", line 34, in top-level template code
-    <a class="nav-link" href="{{ url_for('sweet_spot_analysis') }}">Sweet<br>Spot</a>
+  File "/Users/davidseamans/Projects/BizGrowthNexus/templates/base.html", line 40, in top-level template code
+    <a class="nav-link" href="{{ url_for('blog') }}">Blog</a>
     ^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 1084, in url_for
     return self.handle_url_build_error(error, endpoint, values)
@@ -81,6 +81,6 @@ Traceback (most recent call last):
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 924, in build
     raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'sweet_spot_analysis'. Did you mean 'sales_analysis' instead?
-2024-10-25 22:03:02,655 ERROR: 500 error occurred: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /Users/davidseamans/Projects/BizGrowthNexus/app.py:146]
-2024-10-25 22:06:29,490 INFO: Handles Project startup [in /Users/davidseamans/Projects/BizGrowthNexus/app.py:49]
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'blog'. Did you mean 'login' instead?
+2024-10-25 22:14:05,752 ERROR: 500 error occurred: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /Users/davidseamans/Projects/BizGrowthNexus/app.py:156]
+2024-10-25 22:30:16,614 INFO: Handles Project startup [in /Users/davidseamans/Projects/BizGrowthNexus/app.py:49]

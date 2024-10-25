@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Resource Center</h1>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Business Resources</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Templates</h6>
+                            <ul class="list-unstyled">
+                                <li><a href="#">Business Plan Template</a></li>
+                                <li><a href="#">Marketing Strategy Template</a></li>
+                                <li><a href="#">Financial Forecast Template</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Guides</h6>
+                            <ul class="list-unstyled">
+                                <li><a href="#">Getting Started Guide</a></li>
+                                <li><a href="#">Marketing Best Practices</a></li>
+                                <li><a href="#">Financial Planning Guide</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Quick Links</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="#" class="btn btn-outline-primary btn-sm w-100">Download Resources</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="btn btn-outline-secondary btn-sm w-100">Request Custom Template</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
