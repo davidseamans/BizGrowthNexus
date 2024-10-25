@@ -144,6 +144,10 @@ def sales_analysis():
 def resource_center():
     return render_template('resource_center.html')
 
+@app.route('/blog')
+def blog():  # Note: No @login_required since blogs are usually public
+    return render_template('blog.html')
+
 # More routes and error handling here...
 
 # Error Handlers

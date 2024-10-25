@@ -40,3 +40,46 @@ Traceback (most recent call last):
     raise BuildError(endpoint, values, method, self)
 werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'resource_center'. Did you mean 'sales_analysis' instead?
 2024-10-25 22:06:38,239 ERROR: 500 error occurred: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /Users/davidseamans/Projects/BizGrowthNexus/app.py:151]
+2024-10-25 22:13:59,471 INFO: Handles Project startup [in /Users/davidseamans/Projects/BizGrowthNexus/app.py:49]
+2024-10-25 22:14:05,749 ERROR: Exception on / [GET] [in /Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py:838]
+Traceback (most recent call last):
+  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Projects/BizGrowthNexus/app.py", line 102, in home
+    return render_template('index.html', tactics=tactics)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/jinja2/environment.py", line 1304, in render
+    self.environment.handle_exception()
+  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/jinja2/environment.py", line 939, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/davidseamans/Projects/BizGrowthNexus/templates/index.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/davidseamans/Projects/BizGrowthNexus/templates/base.html", line 40, in top-level template code
+    <a class="nav-link" href="{{ url_for('blog') }}">Blog</a>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 1084, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 1073, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Projects/BizGrowthNexus/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'blog'. Did you mean 'login' instead?
+2024-10-25 22:14:05,752 ERROR: 500 error occurred: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /Users/davidseamans/Projects/BizGrowthNexus/app.py:156]
