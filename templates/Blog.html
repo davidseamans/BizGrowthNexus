@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Temporary Blog</h1>
+<div id="marketing-plan-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order</th>
+                <th>Selected Date</th>
+                <th>Tactic</th>
+                <th>Impact</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(3) %}
+            <tr>
+                <td>{{ i + 1 }}</td>
+                <td><input type="date" class="selected-date"></td>
+                <td>
+                    <select class="tactic-select">
+                        <option value="">Select a tactic</option>
+                        {% for tactic in tactics %}
+                        <option value="{{ tactic.UUID }}">{{ tactic.Title }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td class="tactic-impact"></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+$(document).ready(function() {
+    $('.tactic-select').change(function() {
+        var tacticId = $(this).val();
+        var impactCell = $(this).closest('tr').find('.tactic-impact');
+
+        if (tacticId) {
+            $.ajax({
+                url: '/get_tactic_impact',
+                method: 'POST',
+                data: JSON.stringify({tactic_id: tacticId}),
+                contentType: 'application/json',
+                success: function(response) {
+                    if (response.success) {
+                        var impact = response.impact;
+                        var impactText = `(${impact.users}, ${impact.AC.toFixed(2)}, ${impact.ASV.toFixed(2)}, ${impact.NT.toFixed(2)})`;
+                        impactCell.text(impactText);
+                    } else {
+                        impactCell.text('Error fetching impact data');
+                    }
+                },
+                error: function() {
+                    impactCell.text('Error fetching impact data');
+                }
+            });
+        } else {
+            impactCell.text('');
+        }
+    });
+});
+</script>
+{% endblock %}
