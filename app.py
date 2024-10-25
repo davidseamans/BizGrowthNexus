@@ -3,7 +3,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 from flask import Flask, render_template, request, jsonify, session, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin
+from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import stripe
 import requests
@@ -24,6 +24,9 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+class User(UserMixin):
+    pass
 
 # Stripe API key
 stripe.api_key = os.getenv('STRIPE_SECRET_KEY')
@@ -64,6 +67,14 @@ def create_quickbooks_session():
     return OAuth2Session(client_id, token=session.get('quickbooks_token'), redirect_uri=redirect_uri)
 
 # Routes
+@login_manager.user_loader
+def load_user(user_id):
+    # Replace this with actual user loading logic
+    if user_id is not None:
+        user = User()
+        user.id = user_id
+        return user
+    return None
 
 # Login Route
 @app.route('/login', methods=['GET', 'POST'])
@@ -105,7 +116,6 @@ def home():
 @login_required
 def dashboard():
     return render_template('dashboard.html')
-
 
 @app.route('/connect_quickbooks')
 @login_required
@@ -157,7 +167,16 @@ def user_profile():
 def help_support():  # No login_required as help should be accessible to everyone
     return render_template('help_support.html')
 
-# More routes and error handling here...
+@app.route('/community')
+def community():
+    return render_template('community.html')
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()  # This comes from flask_login
+    flash('You have been logged out.', 'success')
+    return redirect(url_for('home'))
 
 # Error Handlers
 @app.errorhandler(404)
