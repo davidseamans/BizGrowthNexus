@@ -123,11 +123,26 @@ def callback():
     flash("Successfully connected to QuickBooks", "success")
     return redirect(url_for('dashboard'))
 
+@app.route('/marketing_plan')
+@login_required  # if this needs to be protected
+def marketing_plan():
+    return render_template('marketing_plan.html')
+
+@app.route('/sweet_spot_analysis')
+@login_required
+def sweet_spot_analysis():
+    return render_template('sweet_spot_analysis.html')
+
 @app.route('/sales_analysis')
 def sales_analysis():
     if 'oauth_token' not in session or 'realm_id' not in session:
         return redirect(url_for('connect_quickbooks'))
     return render_template('sales_analysis.html')
+
+@app.route('/resource_center')
+@login_required
+def resource_center():
+    return render_template('resource_center.html')
 
 # More routes and error handling here...
 

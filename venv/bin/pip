@@ -1,6 +1,4 @@
-#!/bin/sh
-'''exec' "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/bin/python3.12" "$0" "$@"
-' '''
+#!/Users/davidseamans/Projects/BizGrowthNexus/venv/bin/python3.12
 # -*- coding: utf-8 -*-
 import re
 import sys

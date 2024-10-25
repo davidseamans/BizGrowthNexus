@@ -1,4 +1,4 @@
-2024-10-04 16:38:10,761 ERROR: Exception on / [GET] [in /Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py:838]
+2024-10-04 17:53:18,294 ERROR: Exception on /community [GET] [in /Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py:838]
 Traceback (most recent call last):
   File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
     response = self.full_dispatch_request()
@@ -12,36 +12,38 @@ Traceback (most recent call last):
   File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/app.py", line 35, in home
-    return render_template('index.html', tactics=tactics)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/templating.py", line 150, in render_template
-    return _render(app, template, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/templating.py", line 131, in _render
-    rv = template.render(context)
-         ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/jinja2/environment.py", line 1304, in render
-    self.environment.handle_exception()
-  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/jinja2/environment.py", line 939, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/templates/index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/templates/base.html", line 20, in top-level template code
-    <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a></li>
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 1084, in url_for
-    return self.handle_url_build_error(error, endpoint, values)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 1073, in url_for
-    rv = url_adapter.build(  # type: ignore[union-attr]
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 924, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'dashboard'. Did you mean 'home' instead?
-2024-10-04 16:38:10,765 ERROR: 500 error occurred: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/app.py:154]
-2024-10-04 16:54:42,147 INFO: Handles Project startup [in /Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/app.py:67]
-2024-10-04 16:55:08,054 ERROR: Exception on / [GET] [in /Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py:838]
+  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/app.py", line 294, in community
+    return render_template('community.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/jinja2/environment.py", line 1084, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/jinja2/environment.py", line 1013, in get_template
+    return self._load_template(name, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/jinja2/environment.py", line 972, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/jinja2/loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: community.html
+2024-10-04 17:53:18,299 ERROR: 500 error occurred: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/app.py:307]
+2024-10-04 17:57:19,523 INFO: Handles Project startup [in /Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/app.py:49]
+2024-10-04 18:02:46,004 INFO: Handles Project startup [in /Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/app.py:49]
+2024-10-04 18:07:44,528 INFO: Handles Project startup [in /Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/app.py:49]
+2024-10-04 18:08:48,301 INFO: Handles Project startup [in /Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/app.py:49]
+2024-10-04 18:20:51,075 INFO: Handles Project startup [in /Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/app.py:49]
+2024-10-04 18:29:20,058 INFO: Handles Project startup [in /Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/app.py:49]
+2024-10-04 18:30:26,347 ERROR: Exception on /sweet_spot_analysis [GET] [in /Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py:838]
 Traceback (most recent call last):
   File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
     response = self.full_dispatch_request()
@@ -55,32 +57,29 @@ Traceback (most recent call last):
   File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/app.py", line 35, in home
-    return render_template('index.html', tactics=tactics)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/templating.py", line 150, in render_template
-    return _render(app, template, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/templating.py", line 131, in _render
-    rv = template.render(context)
-         ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/jinja2/environment.py", line 1304, in render
-    self.environment.handle_exception()
-  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/jinja2/environment.py", line 939, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/templates/index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/templates/base.html", line 21, in top-level template code
-    <li class="nav-item"><a class="nav-link" href="{{ url_for('sales_analysis') }}">Sales Analysis</a></li>
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 1084, in url_for
-    return self.handle_url_build_error(error, endpoint, values)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/app.py", line 1073, in url_for
-    rv = url_adapter.build(  # type: ignore[union-attr]
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 924, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'sales_analysis'. Did you mean 'sweet_spot_analysis' instead?
-2024-10-04 16:55:08,058 ERROR: 500 error occurred: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/app.py:186]
-2024-10-04 17:15:43,271 INFO: Handles Project startup [in /Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/app.py:48]
+  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/app.py", line 274, in sweet_spot_analysis
+    return render_template('sweet_spot_analysis.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/jinja2/environment.py", line 1084, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/jinja2/environment.py", line 1013, in get_template
+    return self._load_template(name, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/jinja2/environment.py", line 972, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/jinja2/loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/venv/lib/python3.12/site-packages/flask/templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: sweet_spot_analysis.html
+2024-10-04 18:30:26,354 ERROR: 500 error occurred: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/app.py:307]
+2024-10-04 18:50:03,088 INFO: Handles Project startup [in /Users/davidseamans/Documents/Documents - David’s Laptop/GitHub/BizGrowthNexus/app.py:49]
