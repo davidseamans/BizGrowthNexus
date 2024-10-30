@@ -1,5 +1,6 @@
 import os
 import logging
+#from flask_migrate import Migrate
 from logging.handlers import RotatingFileHandler
 from flask import Flask, render_template, request, jsonify, session, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy

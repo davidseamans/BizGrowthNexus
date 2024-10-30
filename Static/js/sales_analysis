@@ -1,0 +1,260 @@
+let charts = {};
+let globalData = {};
+
+document.addEventListener('DOMContentLoaded', function () {
+    checkAuthStatus();
+    loadInitialData();
+    document.getElementById('applyDateRange').addEventListener('click', fetchSalesAnalysisData);
+    document.getElementById('closeSalesCurtain').addEventListener('click', closeSalesCurtain);
+    document.getElementById('exportCSV').addEventListener('click', exportToCSV);
+});
+
+function checkAuthStatus() {
+    fetch('/api/auth_status')
+        .then(response => response.json())
+        .then(data => {
+            if (!data.authenticated) {
+                window.location.href = '/qb_auth';
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+function loadInitialData() {
+    const startDate = localStorage.getItem('startDate') || '';
+    const endDate = localStorage.getItem('endDate') || '';
+    const duration = localStorage.getItem('duration') || 'month';
+
+    document.getElementById('startDate').value = startDate;
+    document.getElementById('endDate').value = endDate;
+    document.getElementById('durationSelect').value = duration;
+
+    fetchSalesAnalysisData();
+}
+
+function fetchSalesAnalysisData() {
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+    const duration = document.getElementById('durationSelect').value;
+
+    showLoadingIndicator();
+
+    localStorage.setItem('startDate', startDate);
+    localStorage.setItem('endDate', endDate);
+    localStorage.setItem('duration', duration);
+
+    console.log(`Fetching data for start: ${startDate}, end: ${endDate}, duration: ${duration}`);
+
+    fetch(`/api/sales_analysis_data?start_date=${startDate}&end_date=${endDate}&duration=${duration}`)
+        .then(response => {
+            if (!response.ok) {
+                if (response.status === 401) {
+                    // Token might have expired, try to refresh
+                    return fetch('/refresh_token')
+                        .then(refreshResponse => {
+                            if (refreshResponse.ok) {
+                                // Token refreshed, retry the original request
+                                return fetch(`/api/sales_analysis_data?start_date=${startDate}&end_date=${endDate}&duration=${duration}`);
+                            } else {
+                                throw new Error('Authentication failed. Please reconnect to QuickBooks.');
+                            }
+                        });
+                }
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Received data:', data);
+            hideLoadingIndicator();
+            globalData = data;
+            if (!data.monthly_data || data.monthly_data.length === 0) {
+                showError("No data available for the selected date range.");
+            } else {
+                updateCharts(data.monthly_data);
+                updateDateRange(data.monthly_data);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            hideLoadingIndicator();
+            if (error.message.includes('Authentication failed')) {
+                showError('Authentication failed. Please reconnect to QuickBooks.');
+                window.location.href = '/qb_auth';
+            } else {
+                showError('Error fetching sales analysis data: ' + error.message);
+            }
+        });
+}
+
+function updateDateRange(monthlyData) {
+    if (monthlyData.length > 0) {
+        const dates = monthlyData.map(item => new Date(item.Period));
+        const oldestDate = new Date(Math.min.apply(null, dates));
+        const youngestDate = new Date(Math.max.apply(null, dates));
+
+        document.getElementById('startDate').min = oldestDate.toISOString().split('T')[0];
+        document.getElementById('startDate').max = youngestDate.toISOString().split('T')[0];
+        document.getElementById('endDate').min = oldestDate.toISOString().split('T')[0];
+        document.getElementById('endDate').max = youngestDate.toISOString().split('T')[0];
+
+        if (!document.getElementById('startDate').value) {
+            document.getElementById('startDate').value = oldestDate.toISOString().split('T')[0];
+        }
+        if (!document.getElementById('endDate').value) {
+            document.getElementById('endDate').value = youngestDate.toISOString().split('T')[0];
+        }
+    }
+}
+
+function updateCharts(monthlyData) {
+    const chartConfigs = [
+        { id: 'activeClientsChart', key: 'activeClients', label: 'Active Clients', color: 'rgb(75, 192, 192)' },
+        { id: 'avgSaleValueChart', key: 'avgSalesValue', label: 'Average Sales Value', color: 'rgb(255, 99, 132)' },
+        { id: 'numTransactionsChart', key: 'transactions', label: '# of Transactions', color: 'rgb(54, 162, 235)' },
+        { id: 'revenueChart', key: 'revenue', label: 'Revenue', color: 'rgb(255, 206, 86)' }
+    ];
+
+    chartConfigs.forEach(config => {
+        const canvas = document.getElementById(config.id);
+        if (!canvas) return;  // Skip if canvas doesn't exist
+
+        // Destroy existing chart
+        if (charts[config.id]) {
+            charts[config.id].destroy();
+        }
+
+        const ctx = canvas.getContext('2d');
+        const labels = monthlyData.map(item => item.Period);
+        const dataPoints = monthlyData.map(item => item[config.key]);
+
+        charts[config.id] = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: config.label,
+                    data: dataPoints,
+                    borderColor: config.color,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: getUnitFromDuration(),
+                            parser: 'yyyy-MM',
+                            tooltipFormat: 'll'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: config.label
+                        }
+                    }
+                },
+                plugins: {
+                    zoom: {
+                        zoom: {
+                            wheel: {
+                                enabled: true,
+                            },
+                            pinch: {
+                                enabled: true
+                            },
+                            mode: 'xy',
+                        },
+                        pan: {
+                            enabled: false,
+                        },
+                    }
+                }
+            }
+        });
+    });
+}
+
+function getUnitFromDuration() {
+    const duration = document.getElementById('durationSelect').value;
+    switch(duration) {
+        case 'day': return 'day';
+        case 'month': return 'month';
+        case 'quarter': return 'quarter';
+        case 'year': return 'year';
+        default: return 'month';
+    }
+}
+
+function showInvoiceDetailsForDataPoint(period) {
+    const relevantInvoices = globalData.invoices.filter(invoice => {
+        return invoice.date.startsWith(period);
+    });
+
+    updateInvoiceTable(relevantInvoices);
+    document.getElementById('salesCurtainMain').classList.add('curtain-open');
+}
+
+function updateInvoiceTable(invoices) {
+    const tableBody = document.getElementById('invoiceTableBody');
+    tableBody.innerHTML = '';
+
+    invoices.forEach(invoice => {
+        const row = tableBody.insertRow();
+        row.insertCell(0).textContent = invoice.date;
+        row.insertCell(1).textContent = invoice.invoice_number;
+        row.insertCell(2).textContent = invoice.customer_name;
+        row.insertCell(3).textContent = invoice.amount.toFixed(2);
+    });
+}
+
+function closeSalesCurtain() {
+    document.getElementById('salesCurtainMain').classList.remove('curtain-open');
+}
+
+function showLoadingIndicator() {
+    document.getElementById('loadingIndicator').style.display = 'block';
+}
+
+function hideLoadingIndicator() {
+    document.getElementById('loadingIndicator').style.display = 'none';
+}
+
+function showError(message) {
+    const errorDiv = document.getElementById('errorMessage');
+    errorDiv.textContent = message;
+    errorDiv.style.display = 'block';
+    setTimeout(() => {
+        errorDiv.style.display = 'none';
+    }, 5000);
+}
+
+function exportToCSV() {
+    if (!globalData.monthly_data) {
+        showError("No data available to export.");
+        return;
+    }
+
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += "Period,Active Clients,Average Sales Value,Transactions,Revenue\n";
+
+    globalData.monthly_data.forEach(row => {
+        csvContent += `${row.Period},${row.activeClients},${row.avgSalesValue},${row.transactions},${row.revenue}\n`;
+    });
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "sales_analysis.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
