@@ -1,3 +1,4 @@
 2024-10-25 23:00:51,529 ERROR: 500 error occurred: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /Users/davidseamans/Projects/BizGrowthNexus/app.py:188]
 2024-10-30 14:56:24,779 INFO: Handles Project startup [in /Users/davidseamans/Projects/BizGrowthNexus/app.py:53]
 2024-10-30 14:56:25,214 INFO: Handles Project startup [in /Users/davidseamans/Projects/BizGrowthNexus/app.py:53]
+2024-10-30 18:05:25,013 INFO: Handles Project startup [in /Users/davidseamans/Projects/BizGrowthNexus/app.py:53]
