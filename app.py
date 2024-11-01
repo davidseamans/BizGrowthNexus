@@ -61,6 +61,10 @@ def get_tactics():
 # User Loader
 @login_manager.user_loader
 def load_user(user_id):
+    if user_id is not None:
+        user = User()
+        user.id = user_id
+        return user
     return None  # Placeholder until the database is back in use
 
 # OAuth QuickBooks session
@@ -146,9 +150,22 @@ def sweet_spot_analysis():
 
 @app.route('/sales_analysis')
 def sales_analysis():
-    if 'oauth_token' not in session or 'realm_id' not in session:
+    if 'quickbooks_token' not in session or 'realm_id' not in session:
         return redirect(url_for('connect_quickbooks'))
-    return render_template('sales_analysis.html')
+    
+    qbo = create_quickbooks_session()
+    realm_id = session['realm_id']
+    query_url = f"{quickbooks_api_url}/{realm_id}/query?query=SELECT * FROM Invoice"
+    
+    try:
+        response = qbo.get(query_url, headers={"Accept": "application/json"})
+        response.raise_for_status()  # Raise an error if the request failed
+        data = response.json()
+        return render_template('sales_analysis.html', data=data)
+    except requests.exceptions.RequestException as e:
+        app.logger.error(f"Error fetching QBO data: {e}")
+        flash("Error retrieving data from QuickBooks", "danger")
+        return redirect(url_for('dashboard'))
 
 @app.route('/resource_center')
 @login_required

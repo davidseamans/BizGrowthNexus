@@ -18,6 +18,10 @@
 
     <div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
 
+    <!-- Raw Data Display for Verification -->
+    <h2>Raw Data from QuickBooks Online</h2>
+    <pre>{{ data | tojson(indent=2) }}</pre>
+
     <div class="row mb-4">
         <div class="col-md-3">
             <div class="form-group">
@@ -107,8 +111,6 @@
 {% endblock %}
 
 {% block extra_js %}
-<input type="date" id="startDate" name="startDate">
-<input type="date" id="endDate" name="endDate">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@2.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 <script src="{{ url_for('static', filename='js/sales_analysis.js') }}"></script>
