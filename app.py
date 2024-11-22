@@ -26,9 +26,21 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-class User(UserMixin):
-    pass
+# Define the User model
+class User(UserMixin, db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(150), unique=True, nullable=False)
+    email = db.Column(db.String(150), unique=True, nullable=False)
+    password_hash = db.Column(db.String(200), nullable=False)
 
+    # Set password hash
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    # Verify password
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 # Stripe API key
 stripe.api_key = os.getenv('STRIPE_SECRET_KEY')
 
